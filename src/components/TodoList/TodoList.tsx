@@ -8,7 +8,7 @@ type Props = {
   filterBy: FilterBy;
 };
 
-export const TodoList: React.FC<Props> = ({ todoList, filterBy}) => {
+export const TodoList: React.FC<Props> = ({ todoList, filterBy }) => {
   const [visibleTodos, setVisibleTodos] = useState<Todo[]>([]);
 
   useEffect(() => {

@@ -1,17 +1,12 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, {
-  useState,
-  useContext,
-  useEffect,
-  useRef,
-} from 'react';
+import React, { useState, useContext, useEffect, useRef } from "react";
 
-import { AuthContext } from '../Auth/AuthContext';
-import { Todo } from '../../types/Todo';
-import * as Api from '../../api/todos';
-import { FilterBy } from '../../types/FilterBy';
-import { TodoList } from '../TodoList/TodoList';
-import { Footer } from '../Footer/Footer';
+import { AuthContext } from "../Auth/AuthContext";
+import { Todo } from "../../types/Todo";
+import * as Api from "./api/todos";
+import { FilterBy } from "../../types/FilterBy";
+import { TodoList } from "../TodoList/TodoList";
+import { Footer } from "../Footer/Footer";
 
 export const App: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -20,7 +15,7 @@ export const App: React.FC = () => {
   const [todoList, setTodoList] = useState<Todo[] | null>(null);
   const [showFooter, setShowFooter] = useState(false);
   const [filterBy, setFilterBy] = useState<FilterBy>(FilterBy.All);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     // focus the element with `ref={newTodoField}`
@@ -30,7 +25,7 @@ export const App: React.FC = () => {
 
     if (user) {
       Api.getTodos(user.id)
-        .then(data => {
+        .then((data) => {
           setTodoList(data);
 
           if (data.length) {
@@ -38,8 +33,8 @@ export const App: React.FC = () => {
           }
         })
         .catch(() => {
-          setError('Error 404');
-          setTimeout(() => setError(''), 3000);
+          setError("Error 404");
+          setTimeout(() => setError(""), 3000);
         });
     }
   }, []);
@@ -67,19 +62,9 @@ export const App: React.FC = () => {
           </form>
         </header>
 
-        {todoList && (
-          <TodoList
-            todoList={todoList}
-            filterBy={filterBy}
-          />
-        )}
+        {todoList && <TodoList todoList={todoList} filterBy={filterBy} />}
 
-        {showFooter && (
-          <Footer
-            filterBy={filterBy}
-            setFilterBy={setFilterBy}
-          />
-        )}
+        {showFooter && <Footer filterBy={filterBy} setFilterBy={setFilterBy} />}
       </div>
 
       {error && (
@@ -91,7 +76,7 @@ export const App: React.FC = () => {
             data-cy="HideErrorButton"
             type="button"
             className="delete"
-            onClick={() => setError('')}
+            onClick={() => setError("")}
           />
           {error}
         </div>
